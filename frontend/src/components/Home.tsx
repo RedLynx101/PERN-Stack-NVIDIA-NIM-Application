@@ -1,4 +1,5 @@
 import React from 'react';
+import { NIMRecord } from '../interfaces/NIMRecord';
 
 function Home() {
     return (
