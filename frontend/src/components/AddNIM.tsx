@@ -19,26 +19,28 @@ function AddNIM() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+    
+        // Destructure newNim to exclude NIM_ID and capture the rest of the properties
+        const { NIM_ID, ...payload } = newNim;
+    
         try {
-        const response = await axios.post('/api/nims', newNim);
-        console.log('NIM created:', response.data);
-        // Clear the form after successful creation
-        setNewNim({
-            NIM_ID: 0,
-            Model: '',
-            Temperature: '',
-            Top_P: '',
-            Max_Tokens: 1024,
-            Stream: false,
-            Name: '',
-        });
-        // You might want to redirect to the home page or display a success message here
+            // Specify the content type as JSON and send the payload
+            const response = await axios.post('/api/create_nim', payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log('NIM created:', response.data);
+    
+            // Redirect to the home page after successful creation
+            window.location.href = '/';
         } catch (error) {
-        console.error('Error creating NIM:', error);
-        // Handle the error appropriately, e.g., display an error message to the user
+            // Log the data to the console if there's an error
+            console.log('Error creating NIM:', payload);
+            console.error('Error creating NIM:', error);
         }
     };
+    
 
     return (
         <div>
@@ -66,7 +68,36 @@ function AddNIM() {
                     required
                 />
             </div>
-
+            <div>
+            <label htmlFor="Temperature">Temperature:</label>
+                <input
+                    type="number"
+                    id="Temperature"
+                    name="Temperature"
+                    value={newNim.Temperature}
+                    onChange={handleChange}
+                />
+            </div>
+            <div>
+            <label htmlFor="Top_P">Top_P:</label>
+                <input
+                    type="number"
+                    id="Top_P"
+                    name="Top_P"
+                    value={newNim.Top_P}
+                    onChange={handleChange}
+                />
+            </div>
+            <div>
+            <label htmlFor="Max_Tokens">Max_Tokens:</label>
+                <input
+                    type="number"
+                    id="Max_Tokens"
+                    name="Max_Tokens"
+                    value={newNim.Max_Tokens}
+                    onChange={handleChange}
+                />
+            </div>
 
             <button type="submit">Create NIM</button>
         </form>
