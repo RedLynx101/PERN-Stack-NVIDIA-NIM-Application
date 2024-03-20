@@ -59,6 +59,18 @@ app.get('/api/nim/generate', async (req, res) => {
     }
 });
 
+app.post('/api/nims', async (req, res) => {
+    const newNim = req.body;
+    try {
+        const [createdNimId] = await knex('NIM').insert(newNim, 'NIM_ID');
+        const createdNim = await knex('NIM').select('*').where({ NIM_ID: createdNimId }).first();
+        res.json(createdNim);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error - Failed to create NIM');
+    }
+});
+
 // 404 handler
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!")
