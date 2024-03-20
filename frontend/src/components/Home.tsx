@@ -54,10 +54,13 @@ function Home() {
                                 <Link to={`/use/${nim.NIM_ID}`} className="btn btn-primary">
                                     Use this NIM
                                 </Link>
-                                {/* Add a Delete button */}
                                 <button onClick={() => deleteNIM(nim.NIM_ID)} className="btn btn-danger ml-2">
                                     Delete
                                 </button>
+                                {/* Link to edit the NIM, open up a page for it */}
+                                <Link to={`/edit/${nim.NIM_ID}`} className="btn btn-warning ml-2">
+                                    Edit
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -6,19 +6,21 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import AddNIM from './components/AddNIM';
 import UseNIM from './components/UseNIM';
+import UpdateNIM from './components/UpdateNIM'; 
 
 function App() {
   return (
-<Router>
-  <div>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/add" element={<AddNIM />} />
-      <Route path="/use" element={<UseNIM />} />
-    </Routes>
-  </div>
-</Router>
+    <Router>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/add" element={<AddNIM />} />
+          <Route path="/use/:id" element={<UseNIM />} /> 
+          <Route path="/edit/:id" element={<UpdateNIM />} /> 
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

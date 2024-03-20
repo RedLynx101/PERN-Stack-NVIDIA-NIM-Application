@@ -98,6 +98,44 @@ app.delete('/api/delete_nim/:id', async (req, res) => {
     }
 });
 
+// Route to update a NIM by NIM_ID
+app.put('/api/update_nim/:id', async (req, res) => {
+    const nimId = req.params.id;
+    const updatedNim = req.body;
+
+    console.log('api/update_nim called at time:', new Date());
+    console.log('NIM_ID to update:', nimId);
+    console.log('Updated NIM:', updatedNim);
+
+    try {
+        // Update the NIM by NIM_ID
+        await knex('NIM').where('NIM_ID', nimId).update(updatedNim);
+        // Send a confirmation message
+        res.send(`NIM with NIM_ID ${nimId} updated successfully`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error - Failed to update NIM');
+    }
+});
+
+// Route to query a NIM by NIM_ID
+app.get('/api/nims/:id', async (req, res) => {
+    const nimId = req.params.id;
+
+    try {
+        const nim = await knex('NIM').where('NIM_ID', nimId).first();
+        if (nim) {
+            console.log('api/nims/:id data called at time:', new Date());
+            res.json(nim);
+        } else {
+            res.status(404).send('NIM not found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error - Failed to get NIM');
+    }
+});
+
 // 404 handler
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!")
