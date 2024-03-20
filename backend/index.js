@@ -36,14 +36,26 @@ app.get('/api/hello', (req, res) => {
 
 // Route to query database using knex under api/Nims
 app.get('/api/nims', async (req, res) => {
+    console.log('api/nims data called at time:', new Date());
     try {
         knex.select('*').from('NIM').then(data => {
-            console.log('api/nims data called at time:', new Date());
             res.json(data);
         });
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error - Failed to query database using knex');
+    }
+});
+
+// Route to generate inference from a model from NVIDIA
+app.get('/api/nim/generate', async (req, res) => {
+    console.log('api/nim/generate called at time:', new Date());
+    try {
+        // Code to generate inference from a model from NVIDIA
+        res.send('Inference generated from a model from NVIDIA');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error - Failed to generate inference from a model from NVIDIA');
     }
 });
 
