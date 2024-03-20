@@ -71,8 +71,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(3000, () => {
-    console.log('Server listening on port 3000');
+app.listen(3001, () => {
+    console.log('Server listening on port 3001');
     console.log('Press Ctrl+C to quit.');
-    console.log('Test your server by visiting http://localhost:3000');
+    console.log('Test your server by visiting http://localhost:3001');
 });

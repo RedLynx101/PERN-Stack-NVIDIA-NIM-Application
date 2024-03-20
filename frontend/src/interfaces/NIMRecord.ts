@@ -5,4 +5,5 @@ export interface NIMRecord {
     Top_P: string;
     Max_Tokens: number;
     Stream: boolean;
+    Name: string;
 }

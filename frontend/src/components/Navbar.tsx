@@ -28,24 +28,11 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" href="/">
-                                Home
-                            </a>
-                        </li>
-                        <li className="nav-item">
                             <a className="nav-link" href="/add">
                                 Add NIM
                             </a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/use">
-                                Use NIM
-                            </a>
-                        </li>
                     </ul>
-                </div>
-                <div className="d-flex align-items-center justify-content-center">
-                    <span className="text-muted me-3">Admin</span>
                 </div>
             </div>
         </nav>
