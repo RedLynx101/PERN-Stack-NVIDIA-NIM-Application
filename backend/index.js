@@ -80,6 +80,23 @@ app.post('/api/create_nim', async (req, res) => {
     }
 });
 
+// Route to delete a NIM by NIM_ID
+app.delete('/api/delete_nim/:id', async (req, res) => {
+    const nimId = req.params.id;
+
+    console.log('api/delete_nim called at time:', new Date());
+    console.log('NIM_ID to delete:', nimId);
+
+    try {
+        // Delete the NIM by NIM_ID
+        await knex('NIM').where('NIM_ID', nimId).del();
+        // Send a confirmation message
+        res.send(`NIM with NIM_ID ${nimId} deleted successfully`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error - Failed to delete NIM');
+    }
+});
 
 // 404 handler
 app.use((req, res, next) => {
