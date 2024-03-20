@@ -1,18 +1,25 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import AddNIM from './components/AddNIM';
+import UseNIM from './components/UseNIM';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hey Y'all!</h1>
-      </header>
+<Router>
+  <div>
+    <Navbar />
 
-      <main>
-        <p>Let's get started!</p>
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/add" element={<AddNIM />} />
+      <Route path="/use" element={<UseNIM />} />
+    </Routes>
+  </div>
+</Router>
   );
 }
 
