@@ -20,7 +20,7 @@ router.post('/chat/:id', async (req, res) => {
     const { id } = req.params;
     const { message } = req.body;
 
-    console.log('The message is:', message);
+    // console.log('The message is:', message);
 
     try {
         // Fetch model details from your database
@@ -50,7 +50,7 @@ router.post('/chat/:id', async (req, res) => {
         };
 
         const response = await axios.request(options);
-        console.log('Chat response:', response.data);
+        // console.log('Chat response:', response.data);
         res.json(response.data);
     } catch (error) {
         console.error('Error in chat completion:', error);
