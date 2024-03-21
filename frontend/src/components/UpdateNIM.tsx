@@ -87,7 +87,7 @@ function UpdateNIM() {
                                 </div>
                                 <div className="mb-3 form-check">
                                     <input type="checkbox" className="form-check-input" id="Stream" name="Stream" checked={nim.Stream} onChange={handleChange} />
-                                    <label htmlFor="Stream" className="form-check-label">Stream:</label>
+                                    <label htmlFor="Stream" className="form-check-label">Stream</label>
                                 </div>
                                 <div className="d-grid">
                                     <button type="submit" className="btn btn-primary">Update NIM</button>

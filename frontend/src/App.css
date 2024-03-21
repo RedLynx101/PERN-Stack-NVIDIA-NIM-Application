@@ -38,3 +38,12 @@
     transform: rotate(360deg);
   }
 }
+
+.chatWindowStyle {
+  width: 95%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
