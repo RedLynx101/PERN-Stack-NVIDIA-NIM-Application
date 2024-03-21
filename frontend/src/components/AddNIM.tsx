@@ -14,8 +14,16 @@ function AddNIM() {
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewNim({ ...newNim, [event.target.name]: event.target.value });
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+    
+        setNewNim({
+            ...newNim,
+            [name]: value,
+        });
     };
+    
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -43,76 +51,94 @@ function AddNIM() {
     
 
     return (
-        <div>
-        <h2>Add NIM</h2>
-        <form onSubmit={handleSubmit}>
-            <div>
-            <label htmlFor="Name">Name:</label>
-                <input
-                    type="text"
-                    id="Name"
-                    name="Name"
-                    value={newNim.Name}
-                    onChange={handleChange}
-                    required
-                />
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card mt-5">
+                        <div className="card-body">
+                            <h2 className="card-title text-center mb-4">Add NIM</h2>
+                            <form onSubmit={handleSubmit} className="form">
+                                <div className="mb-3">
+                                    <label htmlFor="Name" className="form-label">Name:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="Name"
+                                        name="Name"
+                                        value={newNim.Name}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="Model" className="form-label">Model:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="Model"
+                                        name="Model"
+                                        value={newNim.Model}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="Temperature" className="form-label">Temperature:</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="Temperature"
+                                        name="Temperature"
+                                        value={newNim.Temperature}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="Top_P" className="form-label">Top_P:</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="Top_P"
+                                        name="Top_P"
+                                        value={newNim.Top_P}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="Max_Tokens" className="form-label">Max Tokens:</label>
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        id="Max_Tokens"
+                                        name="Max_Tokens"
+                                        value={newNim.Max_Tokens}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3 form-check">
+                                    <label htmlFor="Stream" className="form-check-label">Stream</label>
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id="Stream"
+                                        name="Stream"
+                                        checked={newNim.Stream}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="text-center">
+                                    <button type="submit" className="btn btn-primary">Create NIM</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-            <label htmlFor="Model">Model:</label>
-                <input
-                    type="text"
-                    id="Model"
-                    name="Model"
-                    value={newNim.Model}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-            <label htmlFor="Temperature">Temperature:</label>
-                <input
-                    type="number"
-                    id="Temperature"
-                    name="Temperature"
-                    value={newNim.Temperature}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-            <label htmlFor="Top_P">Top_P:</label>
-                <input
-                    type="number"
-                    id="Top_P"
-                    name="Top_P"
-                    value={newNim.Top_P}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-            <label htmlFor="Max_Tokens">Max_Tokens:</label>
-                <input
-                    type="number"
-                    id="Max_Tokens"
-                    name="Max_Tokens"
-                    value={newNim.Max_Tokens}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-            <label htmlFor="Stream">Stream:</label>
-                <input
-                    type="checkbox"
-                    id="Stream"
-                    name="Stream"
-                    checked={newNim.Stream}
-                    onChange={handleChange}
-                />
-            </div>
-            <br />
-
-            <button type="submit">Create NIM</button>
-        </form>
         </div>
+
     );
 }
 

@@ -20,6 +20,17 @@ function App() {
           <Route path="/edit/:id" element={<UpdateNIM />} /> 
         </Routes>
       </div>
+
+      {/* Footer */}
+      <footer className="text-center mt-5">
+        <p><strong>Made by Noah Hicks</strong></p>
+        {/* Link to NoahHicks.com */}
+        My Portfolio:  
+        <a href="https://noahhicks.com" target="_blank" rel="noopener noreferrer">
+          NoahHicks.com
+        </a>
+      </footer>
+
     </Router>
   );
 }
