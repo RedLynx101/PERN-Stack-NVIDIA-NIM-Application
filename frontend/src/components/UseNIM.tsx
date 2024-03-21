@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
-function ChatInterface({ nimId }) {
-    const [messages, setMessages] = useState([]);
+function UseNIM() {
+    const [messages, setMessages] = useState<{ role: string, content: string }[]>([]);
     const [inputMessage, setInputMessage] = useState('');
+    const { id } = useParams(); // This will be a string, you might need to convert it to a number if necessary
+
+    const NIM_ID = parseInt(id!);
 
     const sendMessage = async () => {
         if (!inputMessage.trim()) return;
         const userMessage = { role: 'user', content: inputMessage };
-        setMessages([...messages, userMessage]);
+        setMessages((messages) => [...messages, userMessage]);
         
         try {
-        const response = await axios.post(`/api/chat/${nimId}`, { message: inputMessage });
-        const nimResponse = { role: 'nim', content: response.data.response };
-        setMessages(messages => [...messages, nimResponse]);
+            const response = await axios.post(`/api/chat/${NIM_ID}`, { message: inputMessage });
+            const nimResponse = { role: 'nim', content: response.data.response };
+            setMessages((messages) => [...messages, nimResponse]);
         } catch (error) {
-        console.error('Error sending message:', error);
+            console.error('Error sending message:', error);
         }
 
         setInputMessage('');
@@ -25,7 +29,7 @@ function ChatInterface({ nimId }) {
     return (
         <div className="container mt-4">
         <div className="chat-box">
-            {messages.map((msg, index) => (
+            {messages.map((msg: { role: string, content: string }, index: number) => (
             <div key={index} className={`message ${msg.role}`}>
                 {msg.content}
             </div>
@@ -45,4 +49,4 @@ function ChatInterface({ nimId }) {
     );
 }
 
-export default ChatInterface;
+export default UseNIM;
