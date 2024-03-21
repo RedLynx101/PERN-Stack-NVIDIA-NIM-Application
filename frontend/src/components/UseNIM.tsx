@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -6,7 +6,22 @@ import { useParams } from 'react-router-dom';
 function UseNIM() {
     const [messages, setMessages] = useState<{ role: string, content: string }[]>([]);
     const [inputMessage, setInputMessage] = useState('');
-    const { id } = useParams(); // This will be a string, you might need to convert it to a number if necessary
+    const [modelName, setModelName] = useState('');
+    const { id } = useParams(); // Get the NIM ID from the URL
+
+    useEffect(() => {
+        // Fetch NIM details and set the model name
+        const fetchNIMDetails = async () => {
+            try {
+                const response = await axios.get(`/api/nims/${id}`);
+                setModelName(response.data.Name);
+            } catch (error) {
+                console.error('Error fetching NIM details:', error);
+            }
+        };
+
+        fetchNIMDetails();
+    }, [id]);
 
     const NIM_ID = parseInt(id!);
 
@@ -38,7 +53,7 @@ function UseNIM() {
 
     return (
         <div className="container mt-4">
-
+        <h3>Chat with {modelName}</h3>
         <div className="chat-box" style={chatWindowStyle}>
             {messages.map((msg: { role: string, content: string }, index: number) => (
             <div key={index} className={`message ${msg.role}`} style={chatWindowStyle}>
